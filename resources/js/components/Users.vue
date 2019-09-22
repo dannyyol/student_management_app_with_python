@@ -155,7 +155,7 @@
         }
       },
       methods: {
-        loadusers(){
+        loaduser(){
           axios.get('api/user').then(( {data} ) => (this.users = data.data ));
         },
 
@@ -164,7 +164,7 @@
         }
       },
         created() {
-            this.loadusers()
+            this.loaduser()
         }
     }
 </script>
