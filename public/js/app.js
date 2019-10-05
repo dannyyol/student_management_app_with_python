@@ -2076,7 +2076,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    loaduser: function loaduser() {
+    loadusers: function loadusers() {
       var _this = this;
 
       axios.get('api/user').then(function (_ref) {
@@ -2089,7 +2089,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.loaduser();
+    this.loadusers();
   }
 });
 
