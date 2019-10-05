@@ -32,7 +32,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users',
-            'password' => 'required|string|min:191'
+            'password' => 'required|string|min:6'
         ]);
 
         return User::create([
@@ -66,7 +66,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        //Validation
+        $this->validate($request, [
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id, //this will escape the current user id
+            'password' => 'sometimes|min:6' //this allows the user to decide either to fill it or not
+        ]);
+
+        //     
+        $user -> update($request->all());
+        return ['message' => 'edit test'];
     }
 
     /**
@@ -77,6 +87,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        //delete user
+        $user->delete();
     }
 }
